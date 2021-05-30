@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+
+.sub-page-title{
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.main-container{
+    height: 600px;
+    width: 1000px;
+}
+
+.current-date-tag{
+    text-align: center;
+    margin-top: 10px;
+}

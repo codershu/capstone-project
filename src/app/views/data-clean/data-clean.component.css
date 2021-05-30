@@ -1,0 +1,8 @@
+.box{
+    border: solid black 1px;
+    padding: 20px;
+}
+
+.gap{
+    margin-top: 10px;
+}
