@@ -1,3 +1,21 @@
+.container{
+    width: 1100px;
+    margin: auto;
+}
+
+.working-zone{
+    width: 550px;
+    float: left;
+    margin-left: 50px;
+}
+
+.description-zone{
+    width: 450px;
+    float: left;
+    
+}
+
+
 .box{
     border: solid black 1px;
     padding: 20px;

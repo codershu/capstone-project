@@ -3,6 +3,7 @@ import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { timer } from 'rxjs';
+import { JsonToCsvServiceService } from 'src/app/service/json-to-csv/json-to-csv-service.service';
 import { cleannedDataModel, sourceDataElementModel, sourceDataModel, downloadFIleModel, outputFile } from 'src/app/shared/models';
 
 @Component({
@@ -44,7 +45,7 @@ export class DataCleanComponent implements OnInit {
   totalTemperatureSamples: number;
   processingFileInProgress: boolean;
 
-  constructor(private httpClient: HttpClient, private sanitizer: DomSanitizer) { }
+  constructor(private httpClient: HttpClient, private sanitizer: DomSanitizer, private jsonToCsv: JsonToCsvServiceService) { }
 
   ngOnInit(): void {
     this.init()
@@ -282,6 +283,10 @@ export class DataCleanComponent implements OnInit {
     this.downloadJsonHref = uri;
     // console.log("download url", this.downloadJsonHref)
     this.processingFileInProgress = false;
+  }
+
+  convertJsonResultToCsv(){
+    this.jsonToCsv.downloadFile(this.downloadJSONFile, "clean_data");
   }
 
 }

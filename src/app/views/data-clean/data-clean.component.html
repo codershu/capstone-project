@@ -1,85 +1,107 @@
-
-<div class="text-center">
-    <input class="form-control" type="file" (change)="onFileChange($event)">
+<div class="container">
+    <div class="description-zone">
+        <h4>How it works?</h4>
+        <div class="gap"></div>
+        <ul>
+            <li>This is a data cleanning tool</li>
+            <li>The source file is in JSON fromat, and the output is either in JSON or CSV format</li>
+            <li>The example JSON file could be download <a href="../../../assets/data/raw-data/sample.json" download>here</a></li>
+            <li>The purpose of this tool is to filter out the bad data for "Pressure" and "Temperature"</li>
+            <li>The bad data is defined as Empty String, Null value, "NaN" string and those quality flag not equal to 1</li>
+            <li>Unfortunately, the processing speed is not fast, please wait for it to complete. Once the process finished, you will see two download buttons</li>
     
-    <ng-container *ngIf="processingFileInProgress">
-        <clr-spinner [clrInline]="true">Processing ...</clr-spinner>
-    </ng-container>
-    <ng-container *ngIf="!processingFileInProgress">
-        <button (click)="processFile()" class="btn btn-primary" [disabled]="dataSource == null">
-            Process
-        </button>
-    </ng-container>
-</div>
-
-<div class="gap"></div>
-<!-- <ng-container>
-    <clr-progress-bar [clrValue]="processingPercentageOfPressure"></clr-progress-bar>
-    <div class="gap"></div>
-    <clr-progress-bar [clrValue]="(indexOfTemperature / totalTemperatureSamples) * 100"></clr-progress-bar>
-</ng-container>
-<div class="gap"></div> -->
-
-<div class="box">
-    Source json file name:
-    <div class="gap"></div>
-    {{sourceJsonFileName}} 
-</div>
-<div class="gap"></div>
-<div class="gap"></div>
-<div class="box">
-    Before clean:
-    <div class="gap"></div>
-    <div>
-        <div>
-            Pressure data count: {{totalPressureSamples}}
-        </div>
-        <div>
-            Temperature data count: {{totalTemperatureSamples}}
-        </div>
+            <li>Got any question? Please contact shuhan@uvic.ca</li>
+        </ul>
     </div>
-</div>
-<div class="gap"></div>
-<div class="box">
-    After clean:
-    <div class="gap"></div>
-    <div>
-        Valid data count:
+    <div class="working-zone">
+        <div class="text-center">
+            <input class="form-control" type="file" (change)="onFileChange($event)">
+            
+            <ng-container *ngIf="processingFileInProgress">
+                <clr-spinner [clrInline]="true">Processing ...</clr-spinner>
+            </ng-container>
+            <ng-container *ngIf="!processingFileInProgress">
+                <button (click)="processFile()" class="btn btn-primary" [disabled]="dataSource == null">
+                    Process
+                </button>
+            </ng-container>
+        </div>
+        
+        <div class="gap"></div>
+        <!-- <ng-container>
+            <clr-progress-bar [clrValue]="processingPercentageOfPressure"></clr-progress-bar>
+            <div class="gap"></div>
+            <clr-progress-bar [clrValue]="(indexOfTemperature / totalTemperatureSamples) * 100"></clr-progress-bar>
+        </ng-container>
+        <div class="gap"></div> -->
+        
+        <div class="box">
+            Source json file name:
+            <div class="gap"></div>
+            {{sourceJsonFileName}} 
+        </div>
+        <div class="gap"></div>
         <div class="gap"></div>
         <div class="box">
+            Before clean:
+            <div class="gap"></div>
             <div>
-                Pressure: {{cleannedPressureData.valid.actualSamples}}
-            </div>
-            <div>
-                Temperature: {{cleannedTemperatureData.valid.actualSamples}}
+                <div>
+                    Pressure data count: {{totalPressureSamples}}
+                </div>
+                <div>
+                    Temperature data count: {{totalTemperatureSamples}}
+                </div>
             </div>
         </div>
-    </div>
-    <div class="gap"></div>
-    <div>
-        Invalid data count:
         <div class="gap"></div>
         <div class="box">
+            After clean:
+            <div class="gap"></div>
             <div>
-                Pressure: {{cleannedPressureData.invalid.actualSamples}}
+                Valid data count:
+                <div class="gap"></div>
+                <div class="box">
+                    <div>
+                        Pressure: {{cleannedPressureData.valid.actualSamples}}
+                    </div>
+                    <div>
+                        Temperature: {{cleannedTemperatureData.valid.actualSamples}}
+                    </div>
+                </div>
             </div>
+            <div class="gap"></div>
             <div>
-                Temperature: {{cleannedTemperatureData.invalid.actualSamples}}
+                Invalid data count:
+                <div class="gap"></div>
+                <div class="box">
+                    <div>
+                        Pressure: {{cleannedPressureData.invalid.actualSamples}}
+                    </div>
+                    <div>
+                        Temperature: {{cleannedTemperatureData.invalid.actualSamples}}
+                    </div>
+                </div>
             </div>
         </div>
+        
+        <ng-container *ngIf="valueCountDoesNotMatch">
+            <span style="color: red;">The data length does not match</span>
+        </ng-container>
+        
+        <!-- <div class="text-center">
+            <button (click)="downloadFile()" class="btn btn-success">
+                Download
+            </button>
+        </div> -->
+        
+        <ng-container class="text-center" *ngIf="processPressureDataFinished && processTemperatureDataFinished">
+            <a class="btn btn-success" title="Download JSON" [href]="downloadJsonHref" [attr.download]="downloadFileName">Download JSON</a>
+        </ng-container>
+        
+        <ng-container class="text-center" *ngIf="processPressureDataFinished && processTemperatureDataFinished">
+            <a class="btn btn-success" title="Download CSV" (click)="convertJsonResultToCsv()">Download CSV</a>
+        </ng-container>
     </div>
+    
 </div>
-
-<ng-container *ngIf="valueCountDoesNotMatch">
-    <span style="color: red;">The data length does not match</span>
-</ng-container>
-
-<!-- <div class="text-center">
-    <button (click)="downloadFile()" class="btn btn-success">
-        Download
-    </button>
-</div> -->
-
-<ng-container class="text-center" *ngIf="processPressureDataFinished && processTemperatureDataFinished">
-    <a class="btn btn-success" title="Download JSON" [href]="downloadJsonHref" [attr.download]="downloadFileName">Download</a>
-</ng-container>
