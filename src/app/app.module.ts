@@ -8,12 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { DescriptionComponent } from './views/description/description.component';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DataCleanNewComponent } from './views/data-clean-new/data-clean-new.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DataCleanComponent,
-    DescriptionComponent
+    DescriptionComponent,
+    DataCleanNewComponent
   ],
   imports: [
     BrowserModule,

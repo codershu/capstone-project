@@ -28,3 +28,23 @@ export class downloadFIleModel{
 export class outputFile{
     public data: downloadFIleModel[] = [];
 }
+
+export class sourceDataNewModel{
+    public actualSamples: number;
+    public data : sourceDataElementNewModel[];
+    public sensor : string;
+    public sensorName : string;
+    public unitOfMeasure : string;
+}
+
+export class sourceDataElementNewModel{
+    public qaqcFlag : number;
+    public sampleTime : string;
+    public value : string;
+}
+
+export class downloadFIleNewModel{
+    public date: string;
+    public pressureData: number;
+    public temperatureData: number;
+}

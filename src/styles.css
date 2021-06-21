@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
 
 .sub-page-title{
     text-align: center;
@@ -9,10 +10,41 @@
 
 .main-container{
     height: 600px;
-    width: 1000px;
+    width: 1200px;
 }
 
 .current-date-tag{
     text-align: center;
     margin-top: 10px;
+}
+
+.container{
+    width: 1100px;
+    margin: auto;
+}
+
+.working-zone{
+    width: 550px;
+    float: left;
+    margin-left: 50px;
+}
+
+.description-zone{
+    width: 450px;
+    float: left;
+    font-size: 16px;
+}
+
+
+.box{
+    border: solid black 1px;
+    padding: 20px;
+}
+
+.gap{
+    margin-top: 10px;
+}
+
+.member{
+    margin-left: 50px;
 }

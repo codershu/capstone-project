@@ -7,9 +7,13 @@ export class JsonToCsvServiceService {
 
   constructor() { }
   
-  downloadFile(data: any, filename='data') {
-    let csvData = this.ConvertToCSV(data, ['date','pressureData', 'pressureDataQualityFlag', 'temperatureData', 'temperatureDataQualityFlag']);
-    // console.log(csvData)
+  downloadFile(data: any, filename='data', version: number) {
+    let headerList = ['date','pressureData', 'pressureDataQualityFlag', 'temperatureData', 'temperatureDataQualityFlag'];
+    if(version == 2){
+        headerList = ['date','pressureData', 'temperatureData'];
+    }
+    let csvData = this.ConvertToCSV(data, headerList);
+    console.log("finished convert")
     let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
     let dwldLink = document.createElement("a");
     let url = URL.createObjectURL(blob);

@@ -286,7 +286,7 @@ export class DataCleanComponent implements OnInit {
   }
 
   convertJsonResultToCsv(){
-    this.jsonToCsv.downloadFile(this.downloadJSONFile, "clean_data");
+    this.jsonToCsv.downloadFile(this.downloadJSONFile, "clean_data", 1);
   }
 
 }
